@@ -1,0 +1,42 @@
+﻿@model AppliFact.Models.Prestation
+
+
+
+<h1>Prestation sur <a asp-action="Details" asp-controller="Factures" asp-route-id="@Model.IdFacture">Facture @Html.DisplayFor(c => Model.Facture.NumeroFacture)</a> pour <a asp-action="Details" asp-controller="Clients" asp-route-id="@Model.Facture.IdClient">@Model.Facture.Client.RaisonSociale</a></h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            @Html.HiddenFor(c => c.IdFacture)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="MontantHorsTax" class="control-label"></label>
+                <input asp-for="MontantHorsTax" class="form-control" />
+                <span asp-validation-for="MontantHorsTax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TauxTva" class="control-label"></label>
+                <input asp-for="TauxTva" class="form-control" />
+                <span asp-validation-for="TauxTva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

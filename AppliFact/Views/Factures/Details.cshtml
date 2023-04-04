@@ -1,0 +1,62 @@
+﻿
+@model AppliFact.Models.Facture
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h1 class="d-print-none">Facture @Html.DisplayFor(c => Model.NumeroFacture) pour <a asp-action="Details" asp-controller="Clients" asp-route-id="@Model.IdClient">@Model.Client.RaisonSociale</a></h1>
+@if (Model.IsValidated)
+{
+    <partial name="_Print" model="@Model" />
+}
+@if (!Model.IsValidated)
+{
+    <h1 class="d-none d-print-block">Valider la facture avant impression</h1>
+    <menu>
+
+        @if (Model.CanValidate)
+        {
+            @*<a href="@Url.Action("Valider","Factures",new { id=Model.Id })" class="btn btn-primary">Valider</a>*@
+            <a asp-action="Valider" asp-route-id="@Model.Id" class="btn btn-danger">Valider</a>
+        }
+        @if (Model.CanCreate)
+        {
+            <a href="@Url.Action("Create","Prestations",new { idFacture=Model.Id })" class="btn btn-warning">Ajouter une prestation</a>
+
+        }
+    </menu>
+    <hr />
+    <div class="dm-table">
+        <div role="heading">
+            <div role="gridcell">@Html.DisplayNameFor(model => model.Prestations.First().Description)</div>
+            <div role="gridcell">@Html.DisplayNameFor(model => model.Prestations.First().MontantHorsTax)</div>
+            <div role="gridcell">@Html.DisplayNameFor(model => model.Prestations.First().TauxTva)</div>
+            <div role="gridcell">@Html.DisplayNameFor(model => model.Prestations.First().MontanTva)</div>
+            <div role="gridcell">@Html.DisplayNameFor(model => model.Prestations.First().MontantTtc)</div>
+
+
+
+        </div>
+        @foreach (var item in Model.Prestations)
+        {
+
+            <partial name="_prestation-item" model="@item" />
+        }
+        <div>
+            <div role="gridcell"></div>
+            <div role="gridcell">@Html.DisplayFor(c => c.MontantHorsTax)</div>
+            <div role="gridcell"></div>
+            <div role="gridcell">@Html.DisplayFor(c => c.MontantTva)</div>
+            <div role="gridcell">@Html.DisplayFor(c => c.MontantTtc)</div>
+            <div role="gridcell"></div>
+
+        </div>
+    </div>
+    @*<partial name="_Print" model="@Model" />*@
+}
+
+
+
+@section styles{
+    <link href="~/css/facture.css" rel="stylesheet" />
+}

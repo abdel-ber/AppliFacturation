@@ -1,0 +1,16 @@
+﻿@model Prestation
+    <div role="row" onclick="window.location='@((!Model.IsValidated)?Url.Action("Edit","Prestations",new { id=Model.Id}):"")'">
+        <div role="gridcell">@Html.DisplayFor(c => c.Description)</div>
+        <div role="gridcell">@Html.DisplayFor(c => c.MontantHorsTax)</div>
+        <div role="gridcell">@Html.DisplayFor(c => c.TauxTva)</div>
+        <div role="gridcell">@Html.DisplayFor(c => c.MontanTva)</div>
+        <div role="gridcell">@Html.DisplayFor(c => c.MontantTtc)</div>
+        <div role="gridcell">
+            @if (!Model.IsValidated)
+            {
+                <a class="btn btn-danger" asp-action="Delete" asp-controller="Prestations" asp-route-id="@Model.Id">X</a>
+
+
+            }
+        </div>
+        </div>

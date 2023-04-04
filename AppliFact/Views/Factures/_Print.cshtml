@@ -1,0 +1,405 @@
+﻿@model Facture
+<div class="feuille"
+     
+     style="page-break-after:always"
+     Page-Break-Inside="avoid">
+    <div class="row">
+        <div class="col-5">
+            @*<partial name="_Entreprise" />*@
+            <div class="class=" part"">
+                <table>
+                    <tr>
+                        <td vAlign="top" width="100%" class="entete2">
+                            <strong>
+                                <span style="white-space: nowrap">@Html.DisplayFor(model => model.ApplicationUser.Pays)</span>
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td vAlign="top" width="100%">
+                            <strong>
+                                <span style="white-space: nowrap">@Html.DisplayFor(model => model.ApplicationUser.RaisonSocile)</span>
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td vAlign="top" class="entete2">
+                            Adresse&nbsp;:&nbsp;
+                            <strong>
+                                <span style="white-space: nowrap">
+                                    
+                                            @Html.DisplayFor(model => model.ApplicationUser.RaisonSocile)
+                                            
+                                        
+                                    
+                                        <div>
+                                            @Html.DisplayFor(model => model.ApplicationUser.Adresse)
+                                            <br /> @Html.DisplayFor(model => model.ApplicationUser.CodePostal)@Html.DisplayFor(model => model.ApplicationUser.Ville)
+                                        </div>
+                                    
+                                </span>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="part" style="text-align: right;">
+                <div class="legend reverse">FACTURE</div>
+
+                <table style="align-self: right;display:inline-block">
+                    <tr>
+                        <td vAlign="top" class="entete2">
+                            <span style="white-space: nowrap">Numéro de Facture&nbsp;:&nbsp;</span>
+                        </td>
+                        <td vAlign="top" style="text-align: left;">
+                            <strong>
+                                <span style="white-space: nowrap">@Html.DisplayFor(c => c.NumeroFacture)</span>
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td vAlign="top" class="entete2">
+                            <span style="white-space: nowrap">Date&nbsp;:&nbsp;</span>
+                        </td>
+                        <td vAlign="top" style="text-align: left;">
+                            <strong>
+                                <span style="white-space: nowrap;text-align: right;">
+                                    @Html.DisplayFor(c=>c.DateEdition)
+                                </span>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <div class="part">
+        <div class="legend">IDENTIFICATION DU CLIENT</div>
+
+        <table>
+            <tr>
+                <td vAlign="top" style="text-align: right" class="entete2">
+                    Client&nbsp;:
+                </td>
+                <td vAlign="top" width="100%">
+                    <strong>
+                        <span style="white-space: nowrap">@Html.DisplayFor(c => c.Client.RaisonSociale)</span>
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <td vAlign="top" style="text-align: right" class="entete2">
+                    Adresse&nbsp;:
+                </td>
+                <td vAlign="top">
+                    <strong>
+                        <span style="white-space: nowrap">
+                            <Address>
+                                <div>
+                                    @Html.DisplayFor(c => c.Client.Adresse)
+                                    <br />@Html.DisplayFor(c => c.Client.CodePostal) @Html.DisplayFor(c => c.Client.Ville)
+                                    <br />@Html.DisplayFor(c => c.Client.Pays)
+                                </div>
+                            </Address>
+                        </span>
+                    </strong>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="part">
+        <div class="legend">PRESTATIONS</div>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th style="text-align:left">Description</th>
+                    <th class="montant">Montant HT</th>
+                    <th class="montant">taux TVA</th>
+                    <th class="montant">TVA</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var l in Model.Prestations)
+                {
+                    <tr >
+                        <td>
+                            @Html.DisplayFor(c => l.Description)
+                        </td>
+                        <td class="montant">
+                            @Html.DisplayFor(c => l.MontantHorsTax)
+                        </td>
+                        <td class="montant">@Html.DisplayFor(c => l.TauxTva)</td>
+                        <td class="montant">
+                            @Html.DisplayFor(c => l.MontanTva)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td vAlign="top">Total&nbsp;:</td>
+                    <td vAlign="top" class="montant">
+                        <strong> @Html.DisplayFor(c => c.MontantHorsTax)</strong>
+                    </td>
+                    <td></td>
+                    <td vAlign="top" class="montant">
+                        <strong> @Html.DisplayFor(c => c.MontantTva) </strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td vAlign="top" colspan="3" style="text-align: right;">
+                        Montant à payer avant le
+                        @Html.DisplayFor(c => c.DateEcheance)&nbsp;:
+                    </td>
+                    <td vAlign="top" class="montant">
+                        <strong>
+                            @Html.DisplayFor(c => c.MontantTtc)
+                        </strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    @*<div class="part">
+        <div class="legend">CONDITIONS DE PAIEMENT</div>
+        <partial name="_Rib" />
+    </div>*@
+
+    <div class="part">
+        <div class="legend">ACCUSE DE RECEPTION DE LA FACTURE</div>
+        <br />
+        <div style="text-align:right;">
+            <div class="cadre">Date et Signature&nbsp;:</div>
+        </div>
+    </div>
+</div>
+<div class="feuille" style="page-break-after:always" Page-Break-Inside="avoid">
+    <table style="width:100%">
+        <tr>
+            <td style="text-align:left"></td>
+            <td valign="top"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top:35px;">
+                <div class="part">
+                    <div class="legend">CONDITIONS GENERALES DE VENTE</div>
+                    <br />
+                    <table>
+                        <tr>
+                            <td width="48%" valign="top">
+                                <div class="intitule">Modalités d'application</div>
+                                <div class="texte">
+                                    Ces conditions générales de vente définissent les dispositions
+                                    s'appliquant à toutes les ventes de prestation de service
+                                    (ci-après dénomées "les prestations") effectuées par
+                                    l'entreprise "toto tutu" représentée légalement par
+                                    TOTO Tutu (ci-après dénomé "le prestataire") pour ses
+                                    clients (ci-après dénomés "les clients").
+                                </div>
+                                <div class="texte">
+                                    Ces dispositions s'appliquent à toutes les prestations. Seul
+                                    un contrat duement signé entre les clients et le prestataire
+                                    s'appliquant à une prestation en particulier peut modifier une
+                                    ou plusieurs de ses dispositions.
+                                </div>
+                                <div class="intitule">Précisions sur les prestations</div>
+                                <div class="texte">
+                                    <strong>Les prestations comprennent&nbsp;:</strong>
+                                    <li>
+                                        Les services et l’expertise du prestataire agissant en tant
+                                        que professionnel certifié par Microsoft tout au long de la
+                                        durée de la
+                                    </li>
+                                    <li>
+                                        Les frais engagés par le prestataire&nbsp;:&nbsp;de
+                                        déplacement, d'hébergement, de repas consécutifs à la
+                                        présence du prestataire sur le lieu d'exécution de la
+                                    </li>
+                                </div>
+                                <div class="texte">
+                                    <strong>Les prestations ne comprennent pas&nbsp;:</strong>
+                                    <li>
+                                        L'organisation et la mise à disposition des locaux
+                                        permettant le bon déroulement de la prestation
+                                    </li>
+                                    <li>
+                                        L’installation et la mise à disposition des équipements
+                                        (parmi lesquels mobiliers, ordinateurs, vidéo projecteur,
+                                        licences informatiques, supports de cours, tableau blanc,
+                                        marqueurs, connectique, etc.) nécessaires à l’exécution de
+                                        la
+                                    </li>
+                                </div>
+                                <div class="intitule">Nature des obligations</div>
+                                <div class="texte">
+                                    Pour l'accomplissement de la prestation, le prestataire
+                                    s'engage à donner ses meilleurs soins, conformément aux règles
+                                    de l'art. La présente obligation, n'est, de convention
+                                    expresse, que pure obligation de moyens.
+                                </div>
+                                <div class="intitule">Obligation de confidentialité</div>
+                                <div class="texte">
+                                    Le prestataire considèrera comme strictement confidentiel, et
+                                    s'interdit de divulguer, toute information, document, donnée
+                                    ou concept, liste de produits, clients, devis, personnels dont
+                                    il pourra avoir connaissance durant le déroulement de la Pour
+                                    l'application de la présente clause, le prestataire répond de
+                                    ses salariés comme de lui-même. Le prestataire, toutefois, ne
+                                    saurait être tenu pour responsable d'aucune divulgation si les
+                                    éléments divulgués étaient dans le domaine public à la date de
+                                    la divulgation, ou s'il en avait connaissance, ou les obtenait
+                                    de tiers par des moyens légitimes.
+                                </div>
+                                <div class="intitule">Obligation de collaboration</div>
+                                <div class="texte">
+                                    Le client tiendra à la disposition du prestataire toutes les
+                                    informations pouvant contribuer à la bonne réalisation de la
+                                </div>
+                                <div class="intitule">Propriété des résultats</div>
+                                <div class="texte">
+                                    Les résultats issus de la prestation seront en la pleine
+                                    maîtrise du client, à compter du paiement intégral de la
+                                    prestation et le client pourra en disposer comme il l'entend.
+                                    Le prestataire, pour sa part, s'interdit de faire état des
+                                    résultats dont il s'agit et de les utiliser de quelque
+                                    manière, sauf à obtenir préalablement l'autorisation écrite du
+                                    client.
+                                </div>
+                                <div class="intitule">Responsabilités</div>
+                                <div class="texte">
+                                    Le client convient que, quels que soient les fondements de sa
+                                    réclamation, et la procédure suivie pour la mettre en œuvre,
+                                    la responsabilité éventuelle du prestataire à raison de
+                                    l'exécution de la prestation sera limitée à un montant
+                                    n'excédant pas la somme totale effectivement payée par le
+                                    client pour les services ou tâches fournis par le prestataire
+                                    dans le cadre de la
+                                </div>
+                                <div class="texte">
+                                    Par ailleurs, le client renonce à rechercher la responsabilité
+                                    du prestataire en cas de dommages survenus aux fichiers, ou
+                                    tout document qu'il lui aurait confié.
+                                </div>
+                                <div class="texte">
+                                    Le prestataire dégage sa responsabilité à l'égard des dommages
+                                    matériels pouvant atteindre les immeubles, installations,
+                                    matériels, mobiliers du client.
+                                </div>
+                                <div class="texte">
+                                    Le client convient que le prestataire n'encourra aucune
+                                    responsabilité à raison de toute perte de bénéfices, de
+                                    trouble commercial, de demandes que le client subirait, de
+                                    demandes ou de réclamations formulées contre le client et
+                                    émanant d'un tiers quel qu'il soit.
+                                </div>
+                            </td>
+                            <td width="4%"></td>
+                            <td width="48%" valign="top">
+                                <div class="intitule">Sous-traitance</div>
+                                <div class="texte">
+                                    Le prestataire s'interdit de sous-traiter à quiconque la
+                                    réalisation des prestations.
+                                </div>
+                                <div class="intitule">Référencement</div>
+                                <div class="texte">
+                                    Le client accepte que le prestataire puisse faire figurer
+                                    parmi ses références les travaux accomplis.
+                                </div>
+                                <div class="intitule">Tarif des prestations</div>
+                                <div class="texte">
+                                    Le tarif journalier facturé par le prestataire au client varie
+                                    en fonction des paramètres suivants&nbsp;:
+                                    <li>Le type et la durée de la prestation</li>
+                                    <li>Le niveau d'expertise requis</li>
+                                    <li>Les conditions de paiement</li>
+                                    <li>Les déplacements nécessaires</li>
+                                    <li>La période de l'année</li>
+                                </div>
+                                <div class="texte">
+                                    A titre indicatif, le tarif journalier peut varier entre 590
+                                    et 2000 euros par journée d'intervention.
+                                </div>
+                                <div class="intitule">
+                                    Modalités de règlement des prestations
+                                </div>
+                                <div class="texte">
+                                    Le règlement des prestations doit être réalisé en un seul
+                                    versement à la date limite de paiement indiquée sur la
+                                    facture.
+                                </div>
+                                <div class="texte">
+                                    Toute facture pour laquelle aucune demande de duplicata n’aura
+                                    été adressée par le client vers le prestataire dans un délai
+                                    de 21 jours à compter de la date de début de la prestation
+                                    sera réputée reçue par le client.
+                                </div>
+                                <div class="texte">
+                                    Les sommes prévues seront payées par chèque ou par virement
+                                    bancaire sur le compte bancaire indiqué sur la facture.
+                                </div>
+                                <div class="texte">
+                                    Le non-paiement d'une facture à l'échéance peut entraîner la
+                                    suspension de l'exécution de toutes les prestations en cours
+                                    sans préjudice de tous autres recours.
+                                </div>
+                                <div class="texte">
+                                    Tout paiement d'une facture en retard donne lieu de plein
+                                    droit, sans qu'il soit besoin d'une mise en demeure à&nbsp;:
+                                    <li>
+                                        Une pénalité forfaitaire de 10 % du montant TTC de la
+                                        facture.
+                                    </li>
+                                    <li>
+                                        Un réajustement du tarif journalier de 30 € H.T.
+                                        supplémentaire par quinzaine de retard, chaque réajustement
+                                        est applicable dès le premier jour de la quinzaine.
+                                    </li>
+                                    <li>Des intérêts de retard au taux légal minimum.</li>
+                                    <br />La pénalité, les ajustements et l'intérêt de retard sont
+                                    facturés par quinzaine payable par chèque ou virement à
+                                    réception.
+                                </div>
+                                <div class="intitule">Résiliation-sanction</div>
+                                <div class="texte">
+                                    Toute annulation d'une prestation par le client moins de deux
+                                    semaines avant la date de début de la prestation donnera lieu
+                                    au remboursement des frais non remboursables engagés par le
+                                    prestataire en vue de l’exécution de la prestation (titres de
+                                    transports, réservations d’hôtels, frais d’annulation etc.)
+                                    sur présentation des documents attestant des frais engagés.
+                                </div>
+                                <div class="texte">
+                                    Toute annulation d'une prestation par le client moins d'une
+                                    semaine avant la date de début de la prestation pourra être
+                                    facturé 50% du montant qui aurait du être facturé si le
+                                    prestataire n’a pas eu à se déplacer sur les lieus de la
+                                    prestation, dans son intégralité sinon.
+                                </div>
+                                <div class="texte">
+                                    Quel que soit le motif de l'annulation ou de la résiliation du
+                                    contrat et quelle qu'en soit la raison ou l'origine, le
+                                    montant facturé ne sera pas inférieur au nombre de journées
+                                    réellement effectuées par le prestataire multiplié par le
+                                    montant journalier admis pour l'ensemble de la
+                                </div>
+                                <div class="intitule">Juridiction compétente</div>
+                                <div class="texte">
+                                    Les parties s'engagent à tenter de résoudre à l'amiable tout
+                                    différend susceptible d'intervenir entre elles.
+                                </div>
+                                <div class="texte">
+                                    Tout litige susceptible de s'élever entre les parties sera de
+                                    la compétence exclusive du tribunal de commerce de Montauban.
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,129 @@
+﻿.focused {
+    background-color: whitesmoke;
+    border: none;
+    font-weight: bold;
+    width: 100%;
+}
+
+.link_ligne {
+    cursor: pointer;
+    background: white;
+}
+
+    .link_ligne:hover {
+        background-color: lightgray;
+    }
+
+.blured {
+    background-color: white;
+    border: none;
+    font-weight: bold;
+    width: 100%;
+}
+
+.entete {
+    font-size: x-small;
+    font-weight: bold;
+}
+
+.entete2 {
+    text-align: right;
+    padding-right: 3px;
+}
+
+.contenu {
+    font-size: x-small;
+}
+
+.texte {
+    font-size: 9px;
+    text-align: justify;
+    margin-top: 2px;
+}
+
+.intitule {
+    margin-top: 5px;
+    font-size: 11px;
+    color: Maroon;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.cadre {
+    width: 200px;
+    height: 100px;
+    border: solid 1px black;
+    font-size: 9px;
+    font-family: arial;
+    text-align: left;
+}
+
+.montant {
+    text-align: right;
+    vertical-align: top;
+    padding-left: 15px;
+    white-space: nowrap;
+}
+
+.part {
+    position: relative;
+    margin: 5mm 0px 0em 0px;
+    border-top: solid 1.5px maroon;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    padding: 2em 1em 2em 1em;
+}
+
+    .part .legend {
+        position: absolute;
+        top: calc(-1em - 1px);
+        left: 1em;
+        display: inline-block;
+        background-color: white;
+        padding: 0px 1em 1px 1em;
+        border: solid 1.5px maroon;
+        border-radius: 2px;
+        font-weight: bold;
+        color: Maroon;
+    }
+        legend .reverse
+
+{
+    right: 1em;
+    left: initial;
+}
+.feuille {
+    width: 200mm;
+    height: 290mm;
+    padding: 15mm;
+    margin: 5mm;
+    font-size: 0.7em;
+    border: solid 0.5px gray;
+}
+
+.print-yes {
+}
+
+@media print {
+    .print-yes {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    body {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .print-no {
+        display: none;
+    }
+
+    .feuille {
+        width:100%;
+        margin: 0px;
+        border: none;
+        font-size: 0.76em;
+    }
+}

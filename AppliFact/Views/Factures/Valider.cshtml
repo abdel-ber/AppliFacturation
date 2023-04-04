@@ -1,0 +1,35 @@
+﻿@model Facture
+@{
+    ViewData["Title"] = "Valider";
+}
+    <form asp-action="Valider">
+        @Html.HiddenFor(c => c.IdClient)
+        @Html.HiddenFor(c => c.Id)
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                @*<div asp-validation-summary = "ModelOnly" class="text-danger"></div>*@                
+                <div class="form-group">
+                    Une fois la facture validée vous ne pouvez plus ni la modifier ni la supprimer
+                    @*<label asp-for="NumeroFacture" class="control-label"></label>
+                    <input asp-for="NumeroFacture" class="form-control" />
+                    <span asp-validation-for="NumeroFacture" class="text-danger"></span>*@
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateEdition" class="control-label"></label>
+                    <input asp-for="DateEdition" class="form-control" />
+                    <span asp-validation-for="DateEdition" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

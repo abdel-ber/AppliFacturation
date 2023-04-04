@@ -1,0 +1,76 @@
+﻿@model AppliFact.Models.Client
+
+@{
+    ViewData["Title"] = "Factures";
+}
+
+<h1>Factures</h1>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <menu>
+        <a class="btn btn-warning" href="/Factures/Create?idClient=@Model.Id">Ajouter une facture</a>
+    </menu>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RaisonSociale)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RaisonSociale)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Adresse)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Adresse)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CodePostal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CodePostal)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Ville)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Ville)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Factures)
+            </dt>
+            <dd class="col-sm-10">
+                <table class="table">
+
+                    <tbody>
+                        @foreach (var item in Model.Factures)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateEcheance)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NumeroFacture)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.RaisonSociale)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-controller="Factures" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-action="Details" asp-controller="Factures" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-action="Prestations" asp-controller="Factures" asp-route-id="@item.Id">Prestations</a>|
+                                    <a asp-action="Delete" asp-controller="Factures" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </dd>
+        </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,140 @@
+﻿@model AppliFact.Models.Client
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Client : @Html.DisplayFor(model => model.RaisonSociale)</h1>
+
+<menu>
+    <a href="@Url.Action("Create","Factures",new { idClient=Model.Id })" class="btn btn-warning">Ajouter une facture</a>
+    <a href="@Url.Action("Create","Paiements",new { idClient=Model.Id })" class="btn btn-warning">Ajouter un paiement</a>
+
+</menu>
+<hr />
+<div class="alert alert-@((Model.Retard <= 0) ? "success":"danger")">Solde : @Html.DisplayFor(c => c.Solde), à échéance : @Html.DisplayFor(c => c.Retard)</div>
+<hr />
+<div class="row">
+    <div class="col-lg-6">
+        <h4>Factures : @Html.DisplayFor(c => c.TotalDu)</h4>
+        <div class="dm-table links">
+            <table class="table">
+
+
+                <thead>
+                    <tr>
+                        <th role="gridcell">Numéro</th>
+                        <th role="gridcell">Date Edition</th>
+                        <th role="gridcell">Date d'échéance</th>
+                        <th role="gridcell">Montant HT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var f in Model.Factures.OrderByDescending(c => c.DateCreation))
+                    {
+                        <tr role="row" onclick="window.location='@Url.Action("Details","Factures",new { id=f.Id})'">
+                            <td role="gridcell">@Html.DisplayFor(c => f.NumeroFacture)</td>
+                            <td role="gridcell">@Html.DisplayFor(c => f.DateEdition)</td>
+                            <td role="gridcell">@Html.DisplayFor(c => f.DateEcheance)</td>
+                            <td role="gridcell">@Html.DisplayFor(c => f.MontantHorsTax)</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            @*<div role="footer">
+                    <div role="gridcell"></div>
+                    <div role="gridcell"></div>
+                    <div role="gridcell"></div>
+
+                    <div role="gridcell">@Html.DisplayFor(c => c.)</div>
+
+                </div>*@
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <h4>Paiements : @Html.DisplayFor(c => c.TotalPaiements)</h4>
+        <div class="dm-table links">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th role="gridcell">Montant</th>
+                        <th role="gridcell">Date Réception</th>
+                        <th role="gridcell">Date Banque</th>
+                        <th role="gridcell">Moyen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var f in Model.Paiements.OrderByDescending(c => c.DateReception))
+                    {
+                        <tr role="row" onclick="window.location='@Url.Action("Edit","Paiements", new{ id=f.Id})'">
+                            <th role="gridcell">@Html.DisplayFor(c => f.Montant)</th>
+                            <th role="gridcell">@Html.DisplayFor(c => f.DateReception)</th>
+                            <th role="gridcell">@Html.DisplayFor(c => f.DateBanque)</th>
+                            <th role="gridcell">@Html.DisplayFor(c => f.Moyen)</th>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+            <div>
+                
+
+                <div role="gridcell"><h3> Paiement total @Html.DisplayFor(c => c.TotalPaiements)</h3></div>
+
+            </div>
+        
+   
+
+
+
+
+@*<div>
+        <h4>Client</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.OwnerID)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.OwnerID)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.RaisonSociale)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.RaisonSociale)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Adresse)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Adresse)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CodePostal)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CodePostal)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Ville)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Ville)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Pays)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Pays)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@
